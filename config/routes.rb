@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   # SESSIONS
   post "/sessions" => "sessions#create"
 
+  # CATEGORY
+  get "/categories" => "categories#index"
+
 end

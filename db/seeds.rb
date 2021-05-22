@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Recipe.create(name: "Water", ingredients: "Water", directions: "Put in cup", image: "image.jpg")
-Recipe.create(name: "Water", ingredients: "Water", directions: "Put in cup", image: "image.jpg")
-Recipe.create(name: "Water", ingredients: "Water", directions: "Put in cup", image: "image.jpg")
+# Recipe.create(name: "Water", ingredients: "Water", directions: "Put in cup", image: "image.jpg")
+# Recipe.create(name: "Water", ingredients: "Water", directions: "Put in cup", image: "image.jpg")
+# Recipe.create(name: "Water", ingredients: "Water", directions: "Put in cup", image: "image.jpg")
+
+Category.create(time_of_day: "Breakfast")
+Category.create(time_of_day: "Lunch")
+Category.create(time_of_day: "Dinner")

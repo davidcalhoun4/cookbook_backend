@@ -17,7 +17,8 @@ class RecipesController < ApplicationController
       ingredients: params[:ingredients],
       directions: params[:directions],
       image: params[:image],
-      user_id: current_user.id
+      user_id: current_user.id,
+      category_id: params[:category_id]
     )
     if @recipe.save
       render json: @recipe 
@@ -32,6 +33,7 @@ class RecipesController < ApplicationController
     @recipe.ingredients = params[:ingredients] || @recipe.ingredients
     @recipe.directions = params[:directions] || @recipe.directions
     @recipe.image = params[:image] || @recipe.image
+    @recipe.category_id = params[:category_id] || @recipe.category_id
     if @recipe.save
       render json: @recipe
     else
