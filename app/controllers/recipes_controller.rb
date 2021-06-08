@@ -42,18 +42,21 @@ class RecipesController < ApplicationController
         render json: @recipe.erros.full_messages, status: 422
       end
     else 
-      render json: { errors: "you are not authorized to update this user" }, status: :unauthorized 
+      render json: { errors: "you are not authorized to update this recipe" }, status: :unauthorized 
     end
   end
 
   def destroy
     @recipe = Recipe.find_by(id: params[:id])
-    if @recipe.destroy
-      render json: {message: "Recipe #{@recipe.name} destroyed." }
+    if @recipe.user_id == current_user.id
+      if @recipe.destroy
+        render json: {message: "Recipe ~#{@recipe.name}~ destroyed." }
+      else
+        render json: {message: "Recipe ~#{@recipe.name}~ not destroyed."}
+      end
     else
-      render json: {message: "Recipe #{@recipe.name} not destroyed."}
+      render json: { errors: "you are not authorized to delete this recipe" }, status: :unauthorized
     end
-
   end
 
 end
