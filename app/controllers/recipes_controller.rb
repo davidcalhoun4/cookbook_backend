@@ -28,16 +28,21 @@ class RecipesController < ApplicationController
   end
 
   def update
+  
     @recipe = Recipe.find_by(id: params[:id])
-    @recipe.name = params[:name] || @recipe.name
-    @recipe.ingredients = params[:ingredients] || @recipe.ingredients
-    @recipe.directions = params[:directions] || @recipe.directions
-    @recipe.image = params[:image] || @recipe.image
-    @recipe.category.time_of_day = params[:time_of_day] || @recipe.category.time_of_day
-    if @recipe.save
-      render json: @recipe
-    else
-      render json: @recipe.erros.full_messages, status: 422
+    if @recipe.user_id == current_user.id
+      @recipe.name = params[:name] || @recipe.name
+      @recipe.ingredients = params[:ingredients] || @recipe.ingredients
+      @recipe.directions = params[:directions] || @recipe.directions
+      @recipe.image = params[:image] || @recipe.image
+      @recipe.category_id = params[:category_id] || @recipe.category_id
+      if @recipe.save
+        render json: @recipe
+      else
+        render json: @recipe.erros.full_messages, status: 422
+      end
+    else 
+      render json: { errors: "you are not authorized to update this user" }, status: :unauthorized 
     end
   end
 
